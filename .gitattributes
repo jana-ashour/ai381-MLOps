@@ -1,0 +1,3 @@
+# Keep Unix line endings for files that bash and the Linux CI runner read, even when checked out on Windows
+*.sh text eol=lf
+Dockerfile text eol=lf
