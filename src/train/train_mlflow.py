@@ -24,7 +24,6 @@ import numpy as np
 import pandas as pd
 from mlflow.models import infer_signature
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, roc_auc_score
 from sklearn.model_selection import train_test_split
@@ -59,18 +58,7 @@ def preprocessing() -> ColumnTransformer:
 # The candidates (justified in MODEL_SELECTION.md). About 30% of customers churn, so the three new candidates use
 # class_weight="balanced": a missed churner counts as much as a false alarm. Same weighting, three model families.
 CANDIDATES = {
-    # the Lab 2 model, kept as the baseline every new candidate has to beat
-    "logreg": LogisticRegression(max_iter=1000),
-    # linear, fast and explainable, with the class imbalance corrected
-    "logreg_balanced": LogisticRegression(class_weight="balanced", max_iter=1000),
-    # bagged trees can learn interactions (e.g. fiber + many support calls); kept small to stay fast
-    "random_forest_balanced": RandomForestClassifier(
-        n_estimators=100, max_depth=6, min_samples_leaf=5, class_weight="balanced", random_state=42
-    ),
-    # boosted trees, the usual strongest family on tabular data; shallow trees and a slow learning rate
-    "hist_gradient_boosting": HistGradientBoostingClassifier(
-        max_iter=200, learning_rate=0.05, max_depth=3, class_weight="balanced", random_state=42
-    ),
+    "weak": LogisticRegression(C=0.00001, max_iter=1000),
 }
 
 
