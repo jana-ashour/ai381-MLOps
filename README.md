@@ -1,11 +1,6 @@
-# AI381 Lab 3 starter · a working Lab 2 service
 
-Dr. Tariq Al-Omari · AI381 Machine Learning Operations · JUST · Fall 2026/27
 
-Use this only if your own Lab 2 repository is not working. It is a complete Lab 2 solution for the churn
-model: a FastAPI service with `/health` and `/predict`, tests, a multi-stage non-root Dockerfile and a
-GitHub Actions workflow that tests, builds, scans and publishes the image to GHCR by commit SHA.
-The full Lab 3 instructions, checkpoints and rubric are on e-learning. If you use this starter, say so in your video.
+
 
 ## Run it
 ```bash
@@ -18,7 +13,7 @@ curl -s localhost:8000/health
 docker build -t churn-api:local . && docker run --rm -p 8000:8000 churn-api:local
 ```
 
-## What Lab 3 adds (your work)
+
 - MLflow in Docker Compose; log params, metrics, a data hash, the signature and the model
 - Three candidate models compared per slice, latency and size; `MODEL_SELECTION.md`
 - The `@champion` alias and a training workflow with a promotion gate
@@ -36,6 +31,4 @@ docker build -t churn-api:local . && docker run --rm -p 8000:8000 churn-api:loca
 | `.github/workflows/deploy-azure.yml.example` | The Azure option, switched off until you rename it |
 | `MODEL_SELECTION.md` | The template for your decision |
 
-Requirements note: `requirements-dev.txt` adds `mlflow`. Run `pip install -r requirements-dev.txt` again after you update the starter.
 
-The data files (`data/churn_v1.csv`, `data/churn_v2.csv`) are the same as in the Lab 1 starter kit.
