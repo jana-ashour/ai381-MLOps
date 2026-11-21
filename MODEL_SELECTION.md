@@ -31,7 +31,7 @@ What I accepted losing:
 - **No interactions between features**, which the tree models could learn. On this data they did not turn that into better F1.
 
 ## My promotion rules
-- **Latency budget (p95): 30 ms**, because the score is requested while an agent is looking at the customer, so the whole API should answer within about 100 ms. 30 ms for the model leaves room for HTTP, validation and JSON. The champion measures 7.7 ms on my laptop: about a 4× margin, which matters because GitHub's runners are slower than my laptop. The tree models (15 to 18 ms here) could fall outside the budget on a runner, so the budget will exclude them there.
+- **Latency budget (p95): 30 ms**, because the score is requested while an agent is looking at the customer, so the whole API should answer within about 100 ms. 30 ms for the model leaves room for HTTP, validation and JSON. The champion measures 7.7 ms on my laptop and 4.5 ms on the GitHub runner. The same model's timing changes from machine to machine and from run to run (the random forest: 18.4 ms on my laptop, 12.7 ms in CI), so I keep about a 4× margin instead of setting the budget just above today's number.
 - **Minimum gain to replace the champion (F1 points): 0.02**, because with 71 churners in the test set, one extra churner caught moves F1 by only 0.008. A gain below 0.02 means fewer than about 3 customers changed, which a different random split could undo. Every promotion means a new image and a redeploy, so the champion should only change for a real improvement, not for noise.
 
 ## What I would check next
